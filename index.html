@@ -216,7 +216,7 @@
                     <img src="pic.jpg" alt="Your Name">
                 </div>
                 <div>
-                    <h1>Mutoni Keziah Rukazambuga</h1>
+                    <h1 style="color: white;">Mutoni Keziah Rukazambuga</h1>
                     <p>Product Manager | Digital Explorer | Tech Enthusiast</p>
                         <p> Transforming Ideas into Tech Gold</p>
                 </div>
@@ -228,7 +228,7 @@
         <section id="about">
             <h2>Welcome to My Digital Playground!</h2>
             <p>Hey there! 👋 I'm not just your average tech enthusiast – I'm a digital explorer on a mission to turn the wildest ideas into game-changing solutions.</p>
-        <p>Currently pursuing a Bachelor's degree in Information Management, I've had the opportunity to work on diverse projects, From the United Nations World Food Program to  Keen kleeners, to founding a startup, </p>
+        <p>Currently pursuing a Bachelor's degree in Information Management, I've already dipped my toes in some pretty cool waters. From the United Nations World Food Program to  Keen kleeners, to founding a startup, </p>
               <p> my journey is all about pushing boundaries and having a blast while doing it. So, buckle up and join me on this exhilarating ride through the tech landscape!</p>
             <p class="fun-fact">Fun Fact: I can speak three languages fluently, but my favorite language is Python (the coding one, not the snake-charming kind)! 🐍💻</p>
         </section>
@@ -338,12 +338,11 @@
             </ul>
             <p>For more information about the HNG Internship program that has been instrumental in my growth, visit <a href="https://hng.tech" target="_blank">hng.tech</a> and <a href="https://hng.tech/internship" target="_blank">hng.tech/internship</a>.</p>
         </section>
-
         <section id="contact">
-            <h2>Contact Me: Let's Build Something Amazing Together!</h2>
+            <h2 style="text-align: center";> Contact Me: Let's Build Something Amazing Together!</h2>
             <div class="contact-form">
                 <h3>Get In Touch</h3>
-                <form action="https://formspree.io/f/xyzgkbna" method="POST">
+                <form action="https://formspree.io/f/xyzgkbna" method="POST" id="contactForm">
                     <div class="form-group">
                         <label for="name">Name:</label>
                         <input type="text" id="name" name="name" required>
@@ -364,36 +363,63 @@
                 </form>
             </div>
         </section>
+        
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <h2>Thank You!</h2>
+                <p>Your message has been sent. I'll get back to you soon.</p>
+                <button id="closeModal">Close</button>
+            </div>
+        </div>
     </main>
 
     <footer>
-        <p>&copy; 2024 Mutoni. Crafted with 🤎 and a touch of ✨.</p>
+        <p>&copy; 2024 Crafted with 🤎 and a touch of ✨.</p>
         <p>Connect with me on:
             <a href="https://www.linkedin.com/in/keziahmutonirukazambuga/" target="_blank">LinkedIn</a> |
             <a href="https://github.com/toni-cassia" target="_blank">GitHub</a> |
-            <a>Email: kmutoni12@gmail.com</a>
+            <a>Kmutoni12@gmail.com</a>
         </p>
     </footer>
 
-    <div id="myModal" class="modal">
+    <!-- <div id="myModal" class="modal">
         <div class="modal-content">
             <h2>Thank You!</h2>
             <p>Your message has been sent. I'll get back to you soon.</p>
             <button id="closeModal">Close</button>
         </div>
-    </div>
+    </div> -->
 
     <script>
-        document.querySelector('.contact-form form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.getElementById('myModal').style.display = 'block';
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+    
+            // Perform your form submission logic here (e.g., using fetch or XMLHttpRequest)
+            fetch(this.action, {
+                method: this.method,
+                body: new FormData(this),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // Show the modal
+                    document.getElementById('myModal').style.display = 'block';
+    
+                    // Clear the form fields
+                    this.reset();
+                } else {
+                    alert('There was a problem with your submission. Please try again.');
+                }
+            }).catch(error => {
+                alert('There was a problem with your submission. Please try again.');
+            });
         });
-
+    
         document.getElementById('closeModal').addEventListener('click', function() {
             document.getElementById('myModal').style.display = 'none';
-            document.querySelector('.contact-form form').submit();
         });
-
+    
         window.onclick = function(event) {
             if (event.target == document.getElementById('myModal')) {
                 document.getElementById('myModal').style.display = 'none';
